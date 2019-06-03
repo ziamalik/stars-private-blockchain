@@ -46,7 +46,7 @@ class Block {
             
             // Comparing if the hashes changed
             // Returning the Block is valid or not
-            (currentHash == calculatedHash) ? resolve(true) : resolve(false);
+            (currentHash === calculatedHash) ? resolve(true) : resolve(false);
         });
     }
 
@@ -68,7 +68,7 @@ class Block {
         
         let self = this;
         return new Promise((resolve, reject) => {
-            if (self.height > 0 && self.previousBlockHash != null) {
+            if (self.height > 0 && self.previousBlockHash !== null) {
                 var asciiData = hex2ascii(self.body);
                 resolve(JSON.parse(asciiData));
             }
