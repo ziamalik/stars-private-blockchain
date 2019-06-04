@@ -66,8 +66,8 @@ class Blockchain {
         return new Promise(async (resolve, reject) => {
            self.getChainHeight().then(height => {
                //Update previousBlockHash Only if non genesis block 
-               if (height > 0) {
-                   block.previousBlockHash = self.chain[height-1].hash;
+               if (height >= 0) {
+                   block.previousBlockHash = self.chain[height].hash;
                }
 
                block.time = new Date().getTime().toString().slice(0,-3);
@@ -119,9 +119,76 @@ class Blockchain {
     submitStar(address, message, signature, star) {
         let self = this;
         return new Promise(async (resolve, reject) => {
-            
+            let messageTime = parseInt(message.split(':')[1]);
+            let currentTime = parseInt(new Date().getTime().toString().slice(0, -3));
+
+            self._verifyTimeElapsed(messageTime, currentTime)
+            .then(() => self._verifyMessagePromise(message, address, signature))
+            .then(() => self._createBlock(star, address))
+            .then(block => self._addBlock(block))
+            .then(chainedBlock => resolve(chainedBlock))
+            .catch(error => {
+                console.log(error.message);
+                reject(error);
+            });
+
         });
     }
+
+
+    /**
+     * Returns promise after calculating if time elapsed is less than allowed
+     * @param {*} messageTime Time message is received in seconds
+     * @param {*} currentTime Current time in seconds
+     */
+    _verifyTimeElapsed(messageTime, currentTime) {
+        let allowedMinutes = 5;
+        return new Promise((resolve, reject) => {
+            let timeDiff = currentTime - messageTime;
+            if (timeDiff >= 0 && timeDiff <= (allowedMinutes * 60)) {
+                resolve(true);
+            } 
+            else {
+                reject(Error("Time elapsed is more than allowed 5 minutes"));
+            }
+        });
+    }
+
+    /**
+     * 
+     * @param {*} message 
+     * @param {*} address 
+     * @param {*} signature 
+     */
+    _verifyMessagePromise(message, address, signature) {
+        return new Promise((resolve, reject) => {
+            if (bitcoinMessage.verify(message, address, signature)) {
+                resolve(true);
+            }
+            else {
+                reject(Error("Message is not signed!"));
+            }
+        });
+    }
+
+    /**
+     * 
+     * @param {*} star 
+     */
+    _createBlock(star, ownerAddress) {
+        return new Promise((resolve, reject) => {
+            let data = {"owner": ownerAddress, "star" : star};
+            let block = new BlockClass.Block(data);
+            if (block) {
+                resolve(block);
+            }
+            else {
+                reject(Error("Error while creating a block"));
+            }
+
+        });
+    }
+
 
     /**
      * This method will return a Promise that will resolve with the Block
@@ -132,7 +199,12 @@ class Blockchain {
     getBlockByHash(hash) {
         let self = this;
         return new Promise((resolve, reject) => {
-           
+            let block = self.chain.filter(p => p.hash === hash)[0];
+            if(block){
+                resolve(block);
+            } else {
+                resolve(null);
+            }
         });
     }
 
