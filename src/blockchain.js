@@ -239,8 +239,6 @@ class Blockchain {
                 stars.push(block.getBData());
             });
             Promise.all(stars).then(values => {
-                console.log("Values Length:"+values.length);
-                console.log("VALUES:"+JSON.stringify(values));
                 resolve(values.filter(p => p !== undefined)
                             .filter(obj => obj.owner === address));
             });
