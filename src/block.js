@@ -68,7 +68,10 @@ class Block {
         
         let self = this;
         return new Promise((resolve, reject) => {
-            if (self.height > 0 && self.previousBlockHash !== null) {
+            if (self.height === 0) {
+                resolve();
+            }
+            else if (self.height > 0 && self.previousBlockHash !== null) {
                 var asciiData = hex2ascii(self.body);
                 resolve(JSON.parse(asciiData));
             }

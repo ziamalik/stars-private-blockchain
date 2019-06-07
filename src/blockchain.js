@@ -235,7 +235,15 @@ class Blockchain {
         let self = this;
         let stars = [];
         return new Promise((resolve, reject) => {
-            
+            self.chain.forEach(block => {
+                stars.push(block.getBData());
+            });
+            Promise.all(stars).then(values => {
+                console.log("Values Length:"+values.length);
+                console.log("VALUES:"+JSON.stringify(values));
+                resolve(values.filter(p => p !== undefined)
+                            .filter(obj => obj.owner === address));
+            });
         });
     }
 
@@ -248,11 +256,25 @@ class Blockchain {
     validateChain() {
         let self = this;
         let errorLog = [];
+        let validatePromises = [];
         return new Promise(async (resolve, reject) => {
-            
+            self.chain.forEach((block, index) => {
+                var log = {"blockHeight": block.height, "validBlock": null, "validatePreviousBlockHash": null};
+                validatePromises.push(block.validate());
+                if (index > 0) {
+                    log.validatePreviousBlockHash = (block.previousBlockHash === self.chain[index-1].hash);
+                }
+                errorLog.push(log);
+            });
+
+            Promise.all(validatePromises).then(values => {
+                values.forEach((val, index) => {
+                    errorLog[index].validBlock = val;
+                });
+                resolve(errorLog);
+            });
         });
     }
-
 }
 
 module.exports.Blockchain = Blockchain;   
