@@ -42,11 +42,15 @@ class Block {
             var currentHash = self.hash;
                                             
             // Recalculate the hash of the Block
+            self.hash = null;
             var calculatedHash = SHA256(JSON.stringify(self)).toString();
             
             // Comparing if the hashes changed
+            var result = (currentHash === calculatedHash);
+
             // Returning the Block is valid or not
-            (currentHash === calculatedHash) ? resolve(true) : resolve(false);
+            self.hash = currentHash;
+            resolve(result);
         });
     }
 
