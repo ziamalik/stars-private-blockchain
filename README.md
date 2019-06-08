@@ -72,3 +72,6 @@ The code is a simple architecture for a Blockchain application, it includes a RE
 2. `BlockchainController.js` file. It contains the routes of the REST Api. Those are the methods that expose the urls you will need to call when make a request to the application.
 3. `src` folder. In here we are going to have the main two classes we needed to create our Blockchain application, we are going to create a `block.js` file and a `blockchain.js` file that will contain the `Block` and `BlockChain` classes.
 
+
+![Genesis Block](screenshots/GET_Genesis_Block.png)
+
