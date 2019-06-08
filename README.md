@@ -12,7 +12,7 @@ Concepts like:
 ## How to run?
 Depenedency: Node
 
-```$ npm install```
+```$ npm install```  
 ```$ node app.js```
 
 ## What problem will you solve implementing this private Blockchain application?
