@@ -12,9 +12,8 @@ Concepts like:
 
 ## What problem will you solve implementing this private Blockchain application?
 
-Your employer is trying to make a test of concept on how a Blockchain application can be implemented in his company.
-He is an astronomy fans and he spend most of his free time on searching stars in the sky, that's why he would like
-to create a test application that will allows him to register stars, and also some others of his friends can register stars
+People who love astronomy spend most of their free time on searching stars in the sky, that's why they would like
+to create a application that will allows them to register stars, and also some others can register stars
 too but making sure the application know who owned each star.
 
 ### What is the process describe by the employer to be implemented in the application?
@@ -62,7 +61,7 @@ Libraries purpose:
 
 ## Understanding the boilerplate code
 
-The Boilerplate code is a simple architecture for a Blockchain application, it includes a REST APIs application to expose the your Blockchain application methods to your client applications or users.
+The code is a simple architecture for a Blockchain application, it includes a REST APIs application to expose the your Blockchain application methods to your client applications or users.
 
 1. `app.js` file. It contains the configuration and initialization of the REST Api, the team who provide this boilerplate code suggest do not change this code because it is already tested and works as expected.
 2. `BlockchainController.js` file. It contains the routes of the REST Api. Those are the methods that expose the urls you will need to call when make a request to the application.
