@@ -1,7 +1,7 @@
 # Private Blockchain Application
 
 As a Blockchain Developer, this project allows you to demonstrate familiarization with the fundamentals concepts of a Blockchain platform.
-Concepts like:
+- Concepts like:
     - Block
     - Blockchain
     - Wallet
