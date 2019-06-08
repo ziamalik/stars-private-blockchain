@@ -9,6 +9,11 @@ Concepts like:
     - Proof of Existance
 
 
+## How to run?
+Depenedency: Node
+
+$ npm install
+$ node app.js
 
 ## What problem will you solve implementing this private Blockchain application?
 
