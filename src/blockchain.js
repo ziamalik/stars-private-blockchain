@@ -155,7 +155,7 @@ class Blockchain {
     }
 
     /**
-     * 
+     * Returns promise to verify the message given signature and the address
      * @param {*} message 
      * @param {*} address 
      * @param {*} signature 
@@ -172,8 +172,9 @@ class Blockchain {
     }
 
     /**
-     * 
+     * Returns promise to create a block with star data and owner wallet address
      * @param {*} star 
+     * @param {*} ownerAddress 
      */
     _createBlock(star, ownerAddress) {
         return new Promise((resolve, reject) => {
