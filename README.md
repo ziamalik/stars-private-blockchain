@@ -8,13 +8,6 @@ Concepts like:
     - Blockchain Identity
     - Proof of Existance
 
-
-## How to run?
-Depenedency: Node
-
-```$ npm install```<br>
-```$ node app.js```
-
 ## What problem will you solve implementing this private Blockchain application?
 
 People who love astronomy spend most of their free time on searching stars in the sky, that's why they would like
@@ -72,6 +65,32 @@ The code is a simple architecture for a Blockchain application, it includes a RE
 2. `BlockchainController.js` file. It contains the routes of the REST Api. Those are the methods that expose the urls you will need to call when make a request to the application.
 3. `src` folder. In here we are going to have the main two classes we needed to create our Blockchain application, we are going to create a `block.js` file and a `blockchain.js` file that will contain the `Block` and `BlockChain` classes.
 
+## How to test application functionality
 
+0. Make sure you have Node installed on your system. To test this application I used [POSTMAN](https://www.getpostman.com/), which helps to make the requests to API. You also need a wallet. I used [Electrum](https://electrum.org). If you are new to Electrum, watch this video, it is pretty easy: [How to get started with Electrum](https://www.youtube.com/watch?v=WdVlH9N2oKU)
+
+1. First install all dependencies using command ```npm install```. Then run the application using ```node app.js```. You should see in your terminal a message indicating that server is listening in port 8000:
+
+> <i>Server Listening for port: 8000</i>
+
+2. To make sure your application is working fine and it creates the Genesis Block you can use POSTMAN to request the Genesis block
 ![Genesis Block](screenshots/GET_Genesis_Block.png)
+
+3. Make your first request of ownership sending your wallet address
+![Ownership request](screenshots/GET_Request_Ownership.png)
+
+4. Sign the message with your Wallet (In Electrum, Select "Tool > Sign/Verify Message" from menu)
+![Sign the Message](screenshots/Sign_Message.png)
+
+5. Submit the Star
+![Submit Star](screenshots/POST_Submit_Star.png)
+
+6. Retrieve stars owned by wallet
+![Stars Owned by](screenshots/GET_Retrieve_Owner_Stars.png)
+
+7. Validate the Blockchain
+![Validate Blockchain](screenshots/GET_validate_chain.png)
+
+
+
 
